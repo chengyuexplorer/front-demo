@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta>
+    <meta charset="UTF-8"></meta>
+    <title>Fullcalendar Demo</title>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/fullcalendar/fullcalendar.min.css" rel="stylesheet">
+<link href="/static/fullcalendar/fullcalendar.print.min.css" rel="stylesheet" media="print">
+<link href="/static/jquery-ui-1.10.4.custom/css/base/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+<link href="/static/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="/static/fullcalendar/lib/cupertino/jquery-ui.min.css" rel="stylesheet">
+<link href="/static/artDialog/css/ui-dialog.css" rel="stylesheet">
+<link href="/static/wickedpicker/dist/wickedpicker.min.css" rel="stylesheet">
+<script src="/static/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
+<script src="/static/fullcalendar/lib/jquery.min.js"></script>
+<script src="/static/fullcalendar/lib/jquery-ui.min.js"></script>
+<script src="/static/fullcalendar/lib/moment.min.js"></script>
+<script src="/static/fullcalendar/fullcalendar.js"></script>
+<script src="/static/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="/static/artDialog/dist/dialog-min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/wickedpicker/dist/wickedpicker.min.js"></script>
+<script src="/static/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+
+<style>
+    body{
+        margin:40px 10px;
+        padding:0;
+        background: #33cccc;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        font-size: 14px;
+    }
+    #calendar{
+        width:900px;
+        margin:0 auto;
+    }
+    .taxt{
+        width:440px;
+    }
+    .time{
+        width:100px;
+    }
+    .sear{
+        width:85px;
+    }
+    .select{
+        width:150px;
+    }
+    .textarea{
+        width:300px;
+    }
+    .check{
+        padding:8px;
+    }
+    .slidertext{
+        padding-top:40px;
+    }
+    .timepicki{
+        position:relative;
+        z-index: 999;
+    }
+    #edit{
+        position:relative;
+        width:300px;
+    }
+    #edittitle{
+        padding-bottom:10px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    #edittype{
+        position:absolute;
+        top:5px;
+        right:5px;
+        width:80px;
+    }
+</style>
+</head>
+<body>
+    <div id="calendar"></div>
+</body>
+
+<script>
+    $(function () {
+        // 初始化日历控件
+        $("#calendar").fullCalendar({
+            theme: true,// true表示需要加载jquery-ui相关的js、css文件，默认值为false
+            // 添加自定义的button事件
+            customButtons:{
+                btnNew:{
+                    text: "新建",
+                    click: function () {// 为此按钮添加点击事件
+
+                    }
+                },
+                btnQuery: {
+                    text: "查询",
+                    click: function () {
+
+                    }
+                },
+                btnSet: {
+                    text: "设置",
+                    click: function () {
+
+                    }
+                }
+            },
+            header: {// 头部栏显示信息
+                left: 'prev,next today btnSet',// ,表示相邻，空格表示有间隔
+                center: 'title',// title显示当前月份/周/日信息
+                right: 'btnNew btnQuery month,agendaWeek,agendaDay,listMonth'
+            },
+            firstDay: 1,      // 第一天从周几开始显示，0-周天，1-周一
+            monthNames: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],     // 月份全称，默认英文
+            isRTL: false,    //设置为ture时则日历从右往左显示
+            weekends: true,  //是否显示周末，设为false则不显示周六和周日。默认值为true
+            hiddenDays:[],   //隐藏一周中的某一天或某几天，数组形式，如隐藏周二和周五：[2,5]，默认不隐藏，除非weekends设置为false。
+            weekMode:'fixed',//在月视图里显示周的模式，因为每月周数可能不同，所以月视图高度不一定。
+                             // fixed：固定显示6周高，日历高度保持不变liquid：不固定周数，高度随周数变化variable：不固定周数，但高度固定
+            monthNamesShort: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],// 月份简称，默认英文
+            dayNames:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],
+            dayNamesShort:["日","一","二","三","四","五","六"],
+            buttonText:{
+                today: "今天",
+                month: "月",
+                week: "周",
+                day: "天",
+                listMonth:"列表"
+            },
+            allDayDefault: false,
+            slotLabelFormat: "H",
+            businessHours: {
+                dow:[1,2,3,4,5],
+                start:"8:00",
+                end:"17:00"
+            },
+            allDaySlot: true,
+            allDayText: "全天",
+            timeFormat: "HH:mm",//设置的是添加的具体的日程上显示的时间
+            views:{
+                month:{
+                    titleFormat:"YYYY年M月"
+                },
+                week:{
+                    titleFormat:"YYYY年M月D日",
+                    columnFormat:"M.D dddd"
+                },
+                day:{
+                    titleFormat:"YYYY年M月D日 dddd",
+                    columnFormat:"M/D dddd"
+                }
+            },
+            dayClick: function (date,allDay,jsEvent,view) {
+                
+            },
+            eventClick: function () {
+                
+            }
+
+        });
+    });
+</script>
+</html>
